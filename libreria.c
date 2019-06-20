@@ -16,19 +16,15 @@ int comprobar_usuario(char *p1,char *p2){
     return flag;
 }
 int nuevousuario(FILE *pf){
-    char id[20],contrasenna[20],id2[20],s[20],*p1,*p2;
+    char id[20],contrasena[20],id2[20],s[20],*p1,*p2;
     int flag,flag2=1,salida=1,b;
     char x;
     do{
         pf=fopen("usuarios.txt","r");
         if (pf==NULL)
-            printf("ERROR AL ABRIR EL ARCHIVO\n");
+            printf("  Error al intentar abrir el archivo...\n");
         else{
-            printf (" \nSi desea salir pulse 0, para continuar pulse 1 \n");
-            scanf("%i",&flag);
-            fflush(stdin);
-            if (flag==1){
-                printf ("Escribe tu usuario: ");
+                printf ("  Escribe tu usuario: ");
                 scanf ("%s",id);
                 _strupr(id);
                 do{
@@ -39,27 +35,26 @@ int nuevousuario(FILE *pf){
                 }while (feof(pf)==0&&flag2!=1);
                 fclose(pf);
                 if (flag2==0){
-                    printf ("\nIntroduzca una contrasena: ");
+                    printf ("\n  Introduzca una contrasena: ");
                     fflush(stdin);
-                    scanf ("%s",contrasenna);
-                    b=strlen(contrasenna);
+                    scanf ("%s",contrasena);
+                    b=strlen(contrasena);
                     while (b>20 || b<4){
-                        printf ("Error en la contrasena introducela de nuevo: \n");
-                        scanf (" %[^\n]",contrasenna);
-                        b=strlen(contrasenna);
+                        printf ("  Error en la contrasena introducela de nuevo: \n");
+                        scanf (" %[^\n]",contrasena);
+                        b=strlen(contrasena);
                     }
                     pf=fopen("usuarios.txt","a");
-                    fprintf(pf,"%s;%s;\n",id,contrasenna);
+                    fprintf(pf,"%s;%s;\n",id,contrasena);
                     fclose (pf);
                     system ("cls");
-                    printf("ESCRITURA REALIZADA CON EXITO");
+                    printf("  ESCRITURA REALIZADA CON EXITO");
                     salida=0;
                 }
                 else {
                     system("cls");
                     printf("El usuario ya esta registrado, pruebe con un usuario distinto\n");
                 }
-        }
         }
     }while(flag!=0&&salida!=0);
         Sleep(2000);
@@ -118,12 +113,12 @@ int iniciar_sesion(FILE *pf){
         flag2=0;
         pf=fopen("usuarios.txt","r");
         if(pf==NULL)
-            printf("ERROR AL ABRIR EL ARCHIVO");
+            printf("  ERROR AL ABRIR EL ARCHIVO");
         else {
-            printf("\nIntroduzca su usuario:");
+            printf("\n  > Introduzca su usuario:");
             scanf("%s",id);
             fflush(stdin);
-            printf("\nIntroduzca su clave:");
+            printf("\n  > Introduzca su clave:");
             scanf("%s",clave);
             fflush(stdin);
             do{
