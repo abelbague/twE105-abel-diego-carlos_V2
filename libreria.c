@@ -22,7 +22,7 @@ int nuevousuario(FILE *pf){
     do{
         pf=fopen("usuarios.txt","r");
         if (pf==NULL)
-            printf("  Error al intentar abrir el archivo...\n");
+            printf("  Error al intentar leer el archivo...\n");
         else{
                 printf ("  Escribe tu usuario: ");
                 scanf ("%s",id);
@@ -66,12 +66,12 @@ float comprobar_ruta(FILE *pf){
     char Origen[20],Destino[20],*p1,*p2;
     pf=fopen("Distancias.txt","r");
     if (pf==NULL)
-        printf("ERROR AL ABRIR EL ARCHIVO");
+        printf(" Error al intentar leer el archivo...");
     else{
-        printf("Introduzca el origen de su viaje:");
+        printf(" > Introduzca el origen de su viaje: ");
         scanf("%[^\n]",Origen);
         _strupr(Origen);
-        printf("\nIntroduzca el destino de su viaje:");
+        printf("\n > Introduzca el destino de su viaje: ");
         fflush(stdin);
         scanf("%[^\n]",Destino);
         _strupr(Destino);
@@ -86,7 +86,6 @@ float comprobar_ruta(FILE *pf){
             //SI FLAG VALE UNO, LOS STRING SON IGUALES; POR TANTO COMPROBAMOS SI EL DESTINO TAMBIEN COINCIDE
             if (flag==1){
                 system("cls");
-                printf("\nCOMPROBANDO DESTINO...");
                 p1=Destino;
                 p2=ruta1.Destino;
                 flag2=comprobar_usuario(p1,p2);
@@ -113,13 +112,15 @@ int iniciar_sesion(FILE *pf){
         flag2=0;
         pf=fopen("usuarios.txt","r");
         if(pf==NULL)
-            printf("  ERROR AL ABRIR EL ARCHIVO");
+            printf("  Error al intentar leer el archivo...");
         else {
             printf("\n  > Introduzca su usuario:");
             scanf("%s",id);
+            _strupr(id);
             fflush(stdin);
             printf("\n  > Introduzca su clave:");
             scanf("%s",clave);
+            _strupr(clave);
             fflush(stdin);
             do{
                 fscanf(pf,"%[^;];%[^;];\n",id2,clave2);
@@ -161,7 +162,7 @@ int nueva_ruta(FILE *pf,Ruta r){
     scanf("%f", &r.Distancia);
     fprintf(pf, "\n%s;%s;%f", r.Origen, r.Destino, r.Distancia);
     fclose(pf);
-    printf("\nRutas agnadidas correctamente.\n\n");
+    printf("\nRutas anadidas correctamente.\n\n");
     Sleep(2000);
 }
     float calcularprecio (FILE *pf,float distancia){
@@ -172,20 +173,20 @@ int nueva_ruta(FILE *pf,Ruta r){
         fclose(pf);
         do{
             fflush(stdin);
-            printf("\nVa a realizar el viaje de noche?\n 1.SI\t2.NO:");
+            printf("\n > Va a realizar el viaje de noche?\n\n 1) Si \n\n\t 2) No: ");
             scanf("%i",&a);
             if (a==1)
                 precio=distancia*noche;
         }while(a!=1&&a!=2);
         do{
-            printf("\nDesea tener el servicio premium (cargador,conexion a Internet,etc) en su viaje:\n 1.SI\t 2.NO:");
+            printf("\n > Desea tener el servicio premium (cargador,conexion a Internet,etc) en su viaje:\n\n 1) Si \n\n\t 2) No: ");
             scanf("%i",&a);
             fflush(stdin);
             if (a==1)
                 precio+=distancia*premium;
         }while(a!=1&&a!=2);
         precio+=distancia*km;
-        printf("\nEl precio final de tu viaje seria de %f ",precio);
+        printf("\nEl precio final de tu viaje seria de %g euros",precio);
         Sleep(5000);
         return precio;
 }
