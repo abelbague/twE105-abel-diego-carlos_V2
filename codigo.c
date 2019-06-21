@@ -39,7 +39,7 @@ int main()
                 	flag=iniciar_sesion(puntero);
                     if (flag==1){
                     	system("cls");
-                        printf("\n >> Bienvenido %s!\n\n");
+                        printf("\n > Bienvenido!\n\n");
                         distancia=comprobar_ruta(puntero);
                         if (distancia==-1)
                             break;
@@ -71,20 +71,19 @@ int main()
                 
             	if (pin == P)
 				{
-                    FILE *file=fopen("Distancias.txt","a"); //ruta en nuestro pc del archivo al que queremos anadir texto
-                    // Ruta en nuestro pc del archivo al que queremos anadir texto
-
+                    FILE *file=fopen("Distancias.txt","a");
+                    
                     if(file == NULL)
                     {
-                        printf("Error al abrir el archivo");
-                        //return 0;
+                        printf(" Error al intentar abrir el archivo");
+                        return -1;
                     }
 					else
 					{
                         do
 						{
                             system("cls");
-                            printf("Que desea hacer? 1.Introducir nueva ruta\t 2.Modificar precios\t 3.Salir \t");
+                            printf("\n > Opciones...\n\n\n 1) Rutas disponibles\n\n 2) Nueva ruta\n\n 3) Precios actuales\n\n 4) Modificar precios\n\n 5) Resetear rutas\n\n 6) Salir\n");
                         scanf ("%i",&b);
                         fflush(stdin);
 	                        switch (b)
@@ -92,16 +91,15 @@ int main()
 	                            case 1:
 	                            nueva_ruta(file,r);
 	                            break;
-	                            case 2:
+	                            case 3:
 	                                modificar_precios(puntero);
 	                            break;
-	                            case 3:
-	                            flag=1;
-	                            printf("\nHasta la proxima");
+	                            case 5:
+	                            	flag=1;
+	                            	printf("\n Hasta la proxima");
 	                            break;
 	                        }
-                        }
-						while(flag!=1);
+                        }while(flag!=1);
                     }
             	}
 				else if(contador<1)
